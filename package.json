@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bitorjs/application/issues"
   },
-  "homepage": "https://github.com/bitorjs/application#readme"
+  "homepage": "https://github.com/bitorjs/application#readme",
+  "devDependencies": {
+    "require-all": "^3.0.0"
+  }
 }

@@ -1,9 +1,15 @@
 // ref: https://fengmiaosen.github.io/2017/03/21/webpack-core-code/
+// https://github.com/sap9433/filewatcher-webpack-plugin
+// https://github.com/ybonnefond/file-watcher-webpack-plugin
+// https://github.com/JonasDoebertin/webpack-watch/blob/master/index.js
+// https://github.com/cascornelissen/event-hooks-webpack-plugin
 // plugin涉及到源码中的Compiler类和Compilation类，并对这两个类进行了简要介绍。
 
 // Compiler在开始打包时就进行实例化，实例对象里面装着与打包相关的环境和参数，包括options、plugins和loaders等。
 // Compilation在每次文件变化重新打包时都进行一次实例化，它继承自Compiler，其实例对象里装着和modules及chunks相关的信息。
 
+const requireAll = require('require-all');
+const cwd = process.cwd();
 
 class BitorWebpackPlugin {
 
@@ -12,19 +18,34 @@ class BitorWebpackPlugin {
 
     // 当前配置所有使用的插件列表
     // const plugins = compiler.options.plugins;
+    var appfiles = requireAll({
+      dirname: cwd + '/app',
+      // filter      :  /(.+Controller)\.js$/,
+      // excludeDirs :  /^\.(git|svn)$/,
+      recursive: true,
+      map: function (name, path) {
+        console.warn('@@@', path)
+      }
+    });
 
     // 当依赖的文件发生变化时会触发 watch-run 事件
-    compiler.plugin('run', (watching, callback) => {
+    compiler.plugin('watch-run', (watching, callback) => {
       // 获取发生变化的文件列表
       // const changedFiles = watching.compiler.watchFileSystem.watcher.mtimes;
       // changedFiles 格式为键值对，键为发生变化的文件路径。
-      console.log("\r\nwatching",watching)
+      console.warn('-------start----watching------------')
+      // console.log("\r\nwatching", watching)
+      console.warn('-------end----watching------------')
       callback();
     });
 
     compiler.plugin('after-compile', (compilation, callback) => {
       // 把 HTML 文件添加到文件依赖列表，好让 Webpack 去监听 HTML 模块文件，在 HTML 模版文件发生变化时重新启动一次编译
       // compilation.fileDependencies.push(filePath);
+      console.warn('-------start----fileDependencies------------')
+      // console.log(compilation.fileDependencies)
+      // compilation.fileDependencies.push()
+      console.warn('-------end----fileDependencies------------')
       callback();
     });
     // Setup callback for accessing a compilation:
