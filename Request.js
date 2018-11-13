@@ -1,8 +1,8 @@
 const loc = window.location;
 
 class Request {
-  constructor(context) {
-    this.ctx = context;
+  constructor(app) {
+    this.app = app;
   }
 
   get protocol() {

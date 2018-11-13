@@ -1,11 +1,10 @@
-import Request from './Request';
 import HashHistory from '../HashHistory';
 import Router from '../router/router';
 
 class Context {
-  constructor(app) {
+  constructor(app, request) {
     this.app = app;
-    this.req = new Request(this);
+    this.req = request;
     this.$route = new Router();
     this.$route.register('/a11', 'GET', {}, () => {})
     this.$route.register('/a12', 'GET', {}, () => {})
@@ -16,8 +15,14 @@ class Context {
       if (hash.charAt(0) === '#') hash = hash.slice(1);
       if (hash.charAt(0) !== '/') hash = `/${hash}`;
 
-      let r = this.$route.match(hash, 'GET');
-      console.log(r)
+      let routes = this.$route.match(hash, 'GET');
+      routes.forEach(route=>{
+        // app.action(route.)
+        route.handle((res, res)=>{
+
+        })
+      })
+      console.log(routes)
     })
   }
 
