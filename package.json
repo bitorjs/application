@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/bitorjs/application#readme",
   "devDependencies": {
-    "require-all": "^3.0.0"
+    "chokidar": "^2.0.4"
   }
 }
