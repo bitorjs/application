@@ -38,7 +38,8 @@ class Request {
   }
 
   get url() {
-    return loc.hash.slice(1)
+    let hash = loc.hash.slice(1);
+    return `/${hash}`;
   }
 
 }

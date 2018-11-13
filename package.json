@@ -18,5 +18,8 @@
   "homepage": "https://github.com/bitorjs/application#readme",
   "devDependencies": {
     "chokidar": "^2.0.4"
+  },
+  "dependencies": {
+    "koa-compose": "^4.1.0"
   }
 }

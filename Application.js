@@ -1,6 +1,9 @@
 import EventEmitter from 'events';
+import compose from 'koa-compose';
 import Context from './Context';
 import Request from './Request';
+import HashHistory from '../hash-history';
+
 
 
 class Application extends EventEmitter {
@@ -12,15 +15,19 @@ class Application extends EventEmitter {
     this.req = new Request(this);
     this.ctx = new Context(this, this.req)
     this.mode = option.mode || "hash";
-
-    this.hashHistory = new HashHistory().listen(this.callback())
   }
 
-  callback(){
-    let fn = null;
-    return (req, res)=>{
+  startServer() {
+    if (this.hashHistory === undefined) {
+      this.hashHistory = new HashHistory().listen(this.callback())
+    }
+  }
 
+  callback() {
+    const fn = compose(this.middleware);
+    return (url) => {
 
+      this.ctx.url = url;
       this.handle_request(this.ctx, fn)
     }
     // () => {
@@ -28,20 +35,24 @@ class Application extends EventEmitter {
     //   let hash = window.location.hash;
     //   if (hash.charAt(0) === '#') hash = hash.slice(1);
     //   if (hash.charAt(0) !== '/') hash = `/${hash}`;
-  
+
     //   let routes = this.$route.match(hash, 'GET');
     //   routes.forEach(route=>{
     //     // app.action(route.)
     //     route.handle((res, res)=>{
-  
+
     //     })
     //   })
     //   console.log(routes)
     // }
   }
 
-  handle_request(req, res){
-    
+  handle_request(ctx, fnMiddleware) {
+
+    console.log(ctx)
+    return fnMiddleware(ctx).then(() => {
+
+    });
   }
 
   initEvents() {
@@ -55,13 +66,6 @@ class Application extends EventEmitter {
     this.middleware.push(fn);
     return this;
   }
-
-  createContext() {
-
-  }
-
- 
-
 
   back() {
     this.hashHistory.back();
