@@ -3,7 +3,7 @@ import compose from 'koa-compose';
 import Context from './Context';
 import Request from './Request';
 import HashHistory from '../hash-history';
-
+import Router from '../router/router';
 
 
 class Application extends EventEmitter {
@@ -12,6 +12,10 @@ class Application extends EventEmitter {
     super()
     this.middleware = [];
     option = option || {}
+    this.$route = new Router();
+    // this.$route.register('/a11', 'GET', {}, () => {})
+    // this.$route.register('/a12', 'GET', {}, () => {})
+    // this.$route.register("*", "GET", {}, () => {})
     this.req = new Request(this);
     this.ctx = new Context(this, this.req)
     this.mode = option.mode || "hash";
@@ -48,10 +52,8 @@ class Application extends EventEmitter {
   }
 
   handle_request(ctx, fnMiddleware) {
-
-    console.log(ctx)
     return fnMiddleware(ctx).then(() => {
-
+      console.log('hand request')
     });
   }
 
