@@ -1,5 +1,5 @@
 {
-  "name": "application",
+  "name": "bitorjs-application",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,10 +16,8 @@
     "url": "https://github.com/bitorjs/application/issues"
   },
   "homepage": "https://github.com/bitorjs/application#readme",
-  "devDependencies": {
-    "chokidar": "^2.0.4"
-  },
   "dependencies": {
+    "bitorjs-hashhistory": "^1.0.0",
     "koa-compose": "^4.1.0"
   }
 }
