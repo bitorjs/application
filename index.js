@@ -5,8 +5,6 @@ import Context from './Context';
 import Request from './Request';
 import HashHistory from 'bitorjs-hashhistory';
 
-
-
 class Application extends EventEmitter {
 
   constructor(option) {
@@ -60,6 +58,10 @@ class Application extends EventEmitter {
 
   reload() {
     this.hashHistory.reload()
+  }
+
+  replace(...args) {
+    this.hashHistory.replace(...args)
   }
 
   redirect(...args) {
