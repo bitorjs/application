@@ -73,11 +73,11 @@ class Application extends EventEmitter {
 
   // for route
   registerRoute(path, option, fn) {
-    this.$route.register(path, option, fn)
+    return this.$route.register(path, option, fn)
   }
 
   match(url, method) {
-    this.$route.match(url, method)
+    return this.$route.match(url, method)
   }
 }
 
