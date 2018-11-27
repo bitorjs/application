@@ -38,12 +38,15 @@ class Application extends EventEmitter {
     });
   }
 
+
+  // for middleware
   use(fn) {
     if (typeof fn !== 'function') throw new TypeError('middleware must be a function!');
     this.middleware.push(fn);
     return this;
   }
 
+  // for history
   back() {
     this.hashHistory.back();
   }
@@ -66,6 +69,15 @@ class Application extends EventEmitter {
 
   redirect(...args) {
     this.hashHistory.redirect(...args);
+  }
+
+  // for route
+  registerRoute(path, option, fn) {
+    this.$route.register(path, option, fn)
+  }
+
+  match(url, method) {
+    this.$route.match(url, method)
   }
 }
 
