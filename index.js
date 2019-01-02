@@ -15,6 +15,7 @@ class Application extends EventEmitter {
     this.req = new Request(this);
     this.ctx = new Context(this, this.req)
     this.mode = option.mode || "hash";
+    // console.log('223')
   }
 
   startServer() {
@@ -26,7 +27,7 @@ class Application extends EventEmitter {
   callback() {
     const fn = compose(this.middleware);
     return (url) => {
-
+      console.log('sdf')
       this.ctx.url = url;
       this.handle_request(this.ctx, fn)
     }
