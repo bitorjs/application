@@ -19,7 +19,7 @@ class Application extends EventEmitter {
 
   startServer() {
     if (this.hashHistory === undefined) {
-      this.hashHistory = new HashHistory().listen(this.callback())
+      this.hashHistory = new HashHistory(this.mode).listen(this.callback())
     }
   }
 
