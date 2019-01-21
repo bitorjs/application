@@ -1,9 +1,9 @@
 import EventEmitter from 'events';
 import compose from 'koa-compose';
-import Router from 'bitorjs-router';
+import HashHistory from '@bitores/hashhistory';
+import Router from '@bitores/router';
 import Context from './Context';
 import Request from './Request';
-import HashHistory from 'bitorjs-hashhistory';
 import routeCompose from './compose';
 
 class Application extends EventEmitter {

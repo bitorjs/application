@@ -1,6 +1,6 @@
 {
-  "name": "bitorjs-application",
-  "version": "1.0.9",
+  "name": "@bitores/application",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/bitorjs/application#readme",
   "dependencies": {
-    "bitorjs-hashhistory": "^1.0.1",
-    "bitorjs-router": "^1.0.3",
+    "@bitores/hashhistory": "^1.0.0",
+    "@bitores/router": "^1.0.0",
     "koa-compose": "^4.1.0"
   }
 }
