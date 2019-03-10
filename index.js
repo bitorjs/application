@@ -1,6 +1,5 @@
 import EventEmitter from 'events';
 import compose from 'koa-compose';
-import Router from 'bitorjs-router';
 import Context from './Context';
 import Request from './Request';
 import HashHistory from 'bitorjs-hashhistory';
@@ -17,7 +16,6 @@ class Application extends EventEmitter {
     this.req = new Request(this);
     this.ctx = new Context(this, this.req)
     this.mode = option.mode || "hash";
-    this.$route = new Router();
     this.hashHistory = new HashHistory(this.mode);
   }
 
@@ -125,15 +123,6 @@ class Application extends EventEmitter {
     this.filter(() => {
       this.hashHistory.redirect(...args);
     }, ...args)
-  }
-
-  // for route
-  registerRoute(path, option, fn) {
-    return this.$route.register(path, option, fn)
-  }
-
-  match(url, method) {
-    return this.$route.match(url, method)
   }
 }
 
